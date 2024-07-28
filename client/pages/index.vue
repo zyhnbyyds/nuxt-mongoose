@@ -79,7 +79,7 @@ async function refresh() {
       </div>
     </template>
   </NSplitPane>
-  <NDrawer v-model="drawer" style="width: calc(80.5%);" auto-close @close="drawer = false" z-20>
+  <NDrawer v-model="drawer" style="width: calc(80.5%);" auto-close z-20 @close="drawer = false">
     <CreateResource @refresh="refresh" />
   </NDrawer>
 </template>

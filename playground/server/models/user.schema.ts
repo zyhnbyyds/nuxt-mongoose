@@ -17,10 +17,4 @@ export const UserSchema = defineMongooseModel({
       required: true,
     },
   },
-  hooks(schema) {
-    schema.pre('save', function (this, next) {
-      this.password = `hash.${this.password}.${Math.random()}`
-      next()
-    })
-  },
 })

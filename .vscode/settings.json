@@ -1,0 +1,9 @@
+{
+  "cSpell.words": [
+    "birpc",
+    "DASHERIZE",
+    "DECAMELIZE"
+  ],
+  "eslint.enable": true,
+  "oxc_language_server.enable": true
+}

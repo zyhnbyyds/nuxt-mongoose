@@ -49,7 +49,7 @@ export default defineNuxtModule<ModuleOptions>({
     configKey: 'mongoose',
   },
   defaults: {
-    // eslint-disable-next-line n/prefer-global/process
+    // eslint-disable-next-line node/prefer-global/process
     uri: process.env.MONGODB_URI as string,
     devtools: true,
     options: {},

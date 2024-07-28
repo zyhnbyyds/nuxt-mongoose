@@ -5,7 +5,7 @@ import type { Collection, DevtoolsServerContext, Resource, ServerFunctions } fro
 import { capitalize, generateApiRoute, generateSchemaFile, pluralize, singularize } from '../utils'
 
 export function setupResourceRPC({ nuxt }: DevtoolsServerContext): any {
-  const config = nuxt.options.runtimeConfig.mongoose
+  const config = nuxt.options.runtimeConfig.mongoose as any
 
   return {
     async generateResource(collection: Collection, resources: Resource[]) {
@@ -17,7 +17,7 @@ export function setupResourceRPC({ nuxt }: DevtoolsServerContext): any {
         const schemaPath = join(config.modelsDir, `${singular}.schema.ts`)
         if (!fs.existsSync(schemaPath)) {
           fs.ensureDirSync(config.modelsDir)
-          fs.writeFileSync(schemaPath, generateSchemaFile(dbName, collection.fields))
+          fs.writeFileSync(schemaPath, await generateSchemaFile(dbName, collection.fields))
         }
 
         const model = { name: dbName, path: `${singular}.schema` }

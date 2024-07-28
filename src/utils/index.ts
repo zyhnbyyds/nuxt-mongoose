@@ -1,6 +1,10 @@
 import type { WebSocketServer } from 'vite'
 import type { Nuxt } from 'nuxt/schema'
 import plrz from 'pluralize'
+import { ESLint } from 'eslint'
+import { consola } from 'consola'
+
+const eslint = new ESLint()
 
 export function useViteWebSocket(nuxt: Nuxt) {
   return new Promise<WebSocketServer>((_resolve) => {
@@ -31,7 +35,7 @@ export function capitalize(str: string) {
   return str.charAt(0).toUpperCase() + str.slice(1)
 }
 
-export function generateSchemaFile(name: string, fields: any) {
+export async function generateSchemaFile(name: string, fields: any) {
   name = capitalize(name)
   // TODO: fix spacing
   const outputObject = JSON.stringify(
@@ -40,22 +44,37 @@ export function generateSchemaFile(name: string, fields: any) {
       acc[name] = rest
       return acc
     }, {}),
-    null, 2)
+    null,
+    2,
+  )
     .replace(/"([^"]+)":/g, '$1:')
     .replace(/"(\w+)":/g, '$1:')
     .replace(/\s*"\w+":/g, match => match.trim())
     .replace(/"string"/g, '\'string\'')
 
+  const outputText = `import { defineMongooseModel } from '#nuxt/mongoose'
+
+    export const ${name}Schema = defineMongooseModel({
+      name: '${name}',
+      schema: ${outputObject},
+    })
+    `
+  const result = await eslint.lintText(outputText)
+
+  if (result.length) {
+    consola.info(result, outputText, outputObject)
+  }
+
   return `import { defineMongooseModel } from '#nuxt/mongoose'
 
-export const ${name}Schema = defineMongooseModel({
-  name: '${name}',
-  schema: ${outputObject},
-})
-`
+    export const ${name}Schema = defineMongooseModel({
+      name: '${name}',
+      schema: ${outputObject},
+    })
+    `
 }
 
-export function generateApiRoute(action: string, { model, by }: { model: { name: string; path: string }; by?: string }) {
+export function generateApiRoute(action: string, { model, by }: { model: { name: string, path: string }, by?: string }) {
   const modelName = capitalize(model.name)
   const operation = {
     index: `return await ${modelName}Schema.find({})`,

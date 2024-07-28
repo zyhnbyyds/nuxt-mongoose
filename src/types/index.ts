@@ -3,28 +3,28 @@ import type { WebSocketServer } from 'vite'
 import type { ModuleOptions } from '../module'
 
 export interface ServerFunctions {
-  getOptions(): ModuleOptions
+  getOptions: () => ModuleOptions
 
   // Database - collections
-  readyState(): Promise<any>
-  createCollection(name: string): Promise<any>
-  listCollections(): Promise<any>
-  getCollection(name: string): Promise<any>
-  dropCollection(name: string): Promise<any>
+  readyState: () => Promise<any>
+  createCollection: (name: string) => Promise<any>
+  listCollections: () => Promise<any>
+  getCollection: (name: string) => Promise<any>
+  dropCollection: (name: string) => Promise<any>
 
   // Database - documents
-  createDocument(collection: string, data: any): Promise<any>
-  countDocuments(collection: string): Promise<any>
-  listDocuments(collection: string, options: any): Promise<any>
-  getDocument(collection: string, id: string): Promise<any>
-  updateDocument(collection: string, data: any): Promise<any>
-  deleteDocument(collection: string, id: string): Promise<any>
+  createDocument: (collection: string, data: any) => Promise<any>
+  countDocuments: (collection: string) => Promise<any>
+  listDocuments: (collection: string, options: any) => Promise<any>
+  getDocument: (collection: string, id: string) => Promise<any>
+  updateDocument: (collection: string, data: any) => Promise<any>
+  deleteDocument: (collection: string, id: string) => Promise<any>
 
   // Resource - api-routes & models
-  generateResource(collection: Collection, resources: Resource[]): Promise<any>
-  resourceSchema(collection: string): Promise<any>
+  generateResource: (collection: Collection, resources: Resource[]) => Promise<any>
+  resourceSchema: (collection: string) => Promise<any>
 
-  reset(): void
+  reset: () => void
 }
 
 export interface ClientFunctions {

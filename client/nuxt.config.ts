@@ -3,9 +3,12 @@ import { CLIENT_PATH } from '../src/constants'
 
 export default defineNuxtConfig({
   ssr: false,
+
   modules: [
     '@nuxt/devtools-ui-kit',
+    '@unocss/nuxt',
   ],
+
   unocss: {
     shortcuts: {
       'bg-base': 'bg-white dark:bg-[#151515]',
@@ -16,12 +19,16 @@ export default defineNuxtConfig({
       'navbar-glass': 'sticky z-10 top-0 glass-effect',
     },
   },
+
   nitro: {
     output: {
       publicDir: resolve(__dirname, '../dist/client'),
     },
   },
+
   app: {
     baseURL: CLIENT_PATH,
   },
+
+  compatibilityDate: '2024-07-25',
 })

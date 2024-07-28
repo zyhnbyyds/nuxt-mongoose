@@ -246,41 +246,5 @@ th {
 
 td {
   border: 1px solid #272727;
-  &:last-child {
-    border-left: none;
-  }
-  padding: 5px 10px;
-  color: rgba(255, 255, 255, 0.7);
-  &:hover {
-    color: #fff;
-  }
-}
-
-.editing-mode {
-  tr {
-    &:not(.isEditing) {
-      opacity: 0.3;
-      position: relative;
-      &::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: #000;
-        opacity: 0.3;
-      }
-    }
-    &.isEditing {
-      opacity: 1;
-      color: #fff;
-      input {
-        &::placeholder {
-          color: #3ede80;
-        }
-      }
-    }
-  }
 }
 </style>

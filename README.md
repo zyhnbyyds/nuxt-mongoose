@@ -6,7 +6,6 @@
   A Nuxt module for simplifying the use of Mongoose in your project.
 </div>
 
-
 ## Installation
 
 ```bash

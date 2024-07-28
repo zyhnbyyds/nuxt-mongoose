@@ -120,7 +120,7 @@ const formattedFields = computed(() => {
   return fields.value.map((field) => {
     for (const [key, value] of Object.entries(field)) {
       if (!value)
-        delete field[key]
+        delete field[key as keyof ColumnInterface]
     }
 
     return field

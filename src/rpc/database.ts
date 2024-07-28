@@ -57,7 +57,7 @@ export function setupDatabaseRPC({}: DevtoolsServerContext) {
         return ErrorIT(error)
       }
     },
-    async listDocuments(collection: string, options: { page: number; limit: number } = { page: 1, limit: 10 }) {
+    async listDocuments(collection: string, options: { page: number, limit: number } = { page: 1, limit: 10 }) {
       const skip = (options.page - 1) * options.limit
       const cursor = mongoose.connection.db.collection(collection).find().skip(skip)
       if (options.limit !== 0)
