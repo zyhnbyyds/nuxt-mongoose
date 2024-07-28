@@ -54,3 +54,10 @@ coverage
 Network Trash Folder
 Temporary Items
 .apdisk
+
+# Playground
+playground/server/models/*
+!playground/server/models/user.ts
+
+playground/server/api/**/*.ts
+!playground/server/api/user
